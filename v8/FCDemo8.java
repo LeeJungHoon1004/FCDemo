@@ -18,12 +18,12 @@ public class FCDemo8 extends JFrame
    {
       super(title);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+//===============================================================
       fc.setAccessory(new ImagePreview(fc));
 
       JPanel pnl = new JPanel();
       pnl.setLayout(new GridLayout(2, 1));
-
+    //===============================================================
       JButton btn = new JButton("JFileChooser.showOpenDialog() Demo");
       ActionListener al;
       al = new ActionListener()

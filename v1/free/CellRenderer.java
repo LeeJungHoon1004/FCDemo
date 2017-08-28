@@ -10,14 +10,13 @@ import javax.swing.ListCellRenderer;
 
 public class CellRenderer extends JLabel implements ListCellRenderer {
 
-	public CellRenderer()
-    {
+	public CellRenderer() {
 
-        this.setOpaque(true);
-        this.setPreferredSize(new Dimension(600,100));
-        this.setIconTextGap(5);
+		this.setOpaque(true);
+		this.setPreferredSize(new Dimension(580, 100));
+		this.setIconTextGap(5);
 
-    }
+	}
 
 	public Component getListCellRendererComponent(JList list, Object value,
 
@@ -26,8 +25,7 @@ public class CellRenderer extends JLabel implements ListCellRenderer {
 	{
 
 		SetRenderer emo = (SetRenderer) value;
-		
-		
+
 		this.setIcon(emo.getImage());
 
 		this.setText(emo.getTitle());
@@ -35,7 +33,6 @@ public class CellRenderer extends JLabel implements ListCellRenderer {
 		if (isSelected)
 
 		{
-
 			this.setBackground(Color.GRAY);
 			this.setForeground(Color.WHITE);
 		} else {
@@ -44,5 +41,6 @@ public class CellRenderer extends JLabel implements ListCellRenderer {
 		}
 		return this;
 	}
+
 
 }

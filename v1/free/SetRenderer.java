@@ -10,6 +10,7 @@ public class SetRenderer {
 	private String title;
 	private String imagePath;
 	private int index;
+	
 	private Image originImg;
 	private Image changedImg;
 	private ImageIcon image;
@@ -27,6 +28,8 @@ public class SetRenderer {
 	public SetRenderer(String imagePath) {
 		this.imagePath = imagePath;
 	}
+	
+	//================¡â»ý¼ºÀÚ¡â===================
 	
 	public ImageIcon getIconPath() {
 		
