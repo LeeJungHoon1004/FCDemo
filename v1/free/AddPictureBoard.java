@@ -5,11 +5,14 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
+import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +23,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import team_project0807.BasicShape;
 
 //오브젝트 스트림 = 객체직렬화 / 객체직렬화 소켓통신
 //<a target="_blank" href="http://nicebury.tistory.com/15" class="tx-link">http://nicebury.tistory.com/15</a>;
@@ -35,7 +40,7 @@ public class AddPictureBoard extends JDialog {
 	// ======FILE CHOOSER=======================
 	private JFileChooser fc = new JFileChooser();
 	private File img;
-	private SavePictureBoard spb = new SavePictureBoard();
+	private ArrayList<SavePictureBoard> spb = new ArrayList<SavePictureBoard>();
 	
 	private ImageIcon imgIcon;
 	private JLabel picture = new JLabel(imgIcon);
@@ -83,18 +88,32 @@ public class AddPictureBoard extends JDialog {
 				fileChooser();
 				img = fc.getSelectedFile();// 이미지 file형으로 return.
 				picturePath.setText(img.getPath());
-
+				
+				System.out.println(img.getPath());
+				
 				imgIcon = new ImageIcon(img.getPath());
 				picture = new JLabel(imgIcon);
 				picturePan.add(picture, BorderLayout.NORTH);
 				add(picturePan, BorderLayout.NORTH);
+				repaint();
+				
+				new SavePictureBoard(img, img.getName(),
+						title.getText(),comment.getText(),
+						new BasicShape().getId(),new BasicShape().getPw());
+				System.out.println("파일찾기완료");
 			}
 		});
 
 		commit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new SavePictureBoard(img, img.getName(),title.getText(),comment.getText(),new BasicShape().getId(),new BasicShape().getPw());
+				//
+				try {
+					dos.writeUTF("추가");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				marshalling();
 				JOptionPane.showMessageDialog(null, "upload complete");
 				dispose();
@@ -107,8 +126,7 @@ public class AddPictureBoard extends JDialog {
 		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		switch (fc.showOpenDialog(AddPictureBoard.this)) { // △파일열기.
 		case JFileChooser.APPROVE_OPTION:// 열기버튼
-			img = fc.getSelectedFile(); // img에 선택한 파일 넣음.
-			System.out.println(img);// ←선택한 파일주소
+			//img = fc.getSelectedFile(); // img에 선택한 파일 넣음.
 
 			break;
 
@@ -129,7 +147,10 @@ public class AddPictureBoard extends JDialog {
 		try {
 		FileOutputStream fos = new FileOutputStream(f);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(spb);
+        
+        dos.writeInt(spb.size());//파일 갯수 먼저 보냄.
+        
+        oos.writeObject(spb);//spb 파일 보냄.
         oos.close();
 		}catch(Exception e1) {
 			System.out.println("커뮤니티 마샬링 오류");

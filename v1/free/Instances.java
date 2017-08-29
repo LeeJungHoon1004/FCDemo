@@ -1,35 +1,23 @@
 package free;
 
 import java.io.File;
-import java.io.Serializable;
 
-public class SavePictureBoard implements Serializable{
-
-	private File img=null;
-	private String imaName=null;
-	private String writer=null;
-	private String title=null;
-	private String comment=null;
-	private String userId=null;
-	private String userPw=null;
+public class Instances {
+	private File img;
+	private String imaName;
+	private String title;
+	private String comment;
+	private String userId;
+	private String userPw;
 	
-	public SavePictureBoard(File img, String imaName,String writer ,String title, String comment, String userId, String userPw) {
+	public Instances(File img, String imaName, String title, String comment, String userId, String userPw) {
 		super();
 		this.img = img;
 		this.imaName = imaName;
-		this.writer = writer;
 		this.title = title;
 		this.comment = comment;
 		this.userId = userId;
 		this.userPw = userPw;
-	}
-
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
 	}
 
 	public File getImg() {
