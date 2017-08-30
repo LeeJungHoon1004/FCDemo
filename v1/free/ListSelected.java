@@ -17,7 +17,7 @@ public class ListSelected extends JDialog {
 	
 	private ImageIcon imgIcon;
 	private JLabel img = new JLabel(imgIcon);
-	private JLabel writer = new JLabel();
+	//private JLabel writer = new JLabel();
 	private JLabel title = new JLabel();
 	private JLabel comment = new JLabel();
 	
@@ -28,7 +28,7 @@ public class ListSelected extends JDialog {
 		setLayout(new BorderLayout(3, 3));
 		
 		img.setPreferredSize(new Dimension(500,250));
-		writer.setPreferredSize(new Dimension(50,50));
+		//writer.setPreferredSize(new Dimension(50,50));
 		title.setPreferredSize(new Dimension(120, 50));
 		comment.setPreferredSize(new Dimension(500,150));
 		
@@ -36,7 +36,7 @@ public class ListSelected extends JDialog {
 		pan.setBorder(tborder);
 		comment.setBorder(tborder);
 		
-		pan.add(writer);
+		//pan.add(writer);
 		pan.add(title);
 		
 		add(img,BorderLayout.NORTH);
@@ -57,9 +57,9 @@ public class ListSelected extends JDialog {
 		setModal(true);
 	}
 
-	public ListSelected(String img,String writer,String title,String comment) {
+	public ListSelected(String img,String title,String comment) {
 		this.imgIcon = new ImageIcon(img);
-		this.writer.setText(writer);
+		//this.writer.setText(writer);
 		this.title.setText(title);
 		this.comment.setText(comment);
 	}
